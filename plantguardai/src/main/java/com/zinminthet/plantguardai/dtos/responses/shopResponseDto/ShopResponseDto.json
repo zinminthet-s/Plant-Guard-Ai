@@ -1,0 +1,45 @@
+{
+  "shops": [
+    {
+      "shopId": 1,
+      "name": "Shop1",
+      "merchant": {
+        "name": "zinminthet"
+      },
+      "Items": [
+        {
+          "pesticidesId": 1,
+          "name": "MMH",
+          "price": 13.6,
+          "photo": {
+            "url": ""
+          }
+        },
+        {
+          "pesticidesId": 3,
+          "name": "Awba",
+          "price": 14.77,
+          "photo": {
+            "url": ""
+          }
+        },
+        {
+          "pesticidesId": 6,
+          "name": "Good",
+          "price": 77.4,
+          "photo": {
+            "url": ""
+          }
+        },
+        {
+          "pesticidesId": 11,
+          "name": "Hope",
+          "price": 11,
+          "photo": {
+            "url": ""
+          }
+        }
+      ]
+    }
+  ]
+}
