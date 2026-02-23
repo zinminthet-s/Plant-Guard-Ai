@@ -15,7 +15,9 @@ import lombok.Setter;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private Byte id;
+
     private String name;
     private String description;
 }

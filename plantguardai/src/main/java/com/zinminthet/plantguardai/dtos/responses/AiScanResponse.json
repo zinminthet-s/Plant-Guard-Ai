@@ -1,0 +1,13 @@
+{
+  "aiResult": {
+    "diseaseName": "Healthy rice leaf",
+    "probability": "92.22 percent",
+    "prevention": "Water the plants proportionally, Make use of traditional methods",
+    "pesticides": [
+      {
+        "pesticideId": 1,
+        "pesticideName": "Aw bar something"
+      }
+    ]
+  }
+}

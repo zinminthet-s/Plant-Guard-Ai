@@ -75,7 +75,10 @@ You are free to use, modify, and distribute this software, but **attribution is 
 Please credit the original authors when using this project:
 
 - Frontend Mobile: [Khan Zayar Soe](https://github.com/khantzayarsoe)
-- Backend: [Zin Min Thet](https://github.com/zinminteht-s)  
+- UI/UX: Ye Yint Zaw Oo
+- Backend: [Zin Min Thet](https://github.com/zinminthet-s), [Aung Thaw](https://github.com/aungthaw11)
+- AI: [Aung Thaw](https://github.com/aungthaw11), [Zin Min Thet](https://github.com/zinminthet-s)
+
 
 See the [LICENSE](./LICENSE) file for full details.
 
@@ -83,5 +86,4 @@ See the [LICENSE](./LICENSE) file for full details.
 
 ## 🙏 Acknowledgements
 - University of Computer Studies, Mandalay (UCSM) for providing the platform to showcase this project.  
-- Faculty and mentors for their guidance throughout the academic journey.  
-- [Khan Zayar Soe](https://github.com/khantzayarsoe) for developing the mobile frontend that integrates seamlessly with this backend.
+- Faculty and mentors for their guidance throughout the academic journey.
