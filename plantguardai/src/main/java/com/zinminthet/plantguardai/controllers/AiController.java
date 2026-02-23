@@ -16,12 +16,14 @@ import java.io.IOException;
 public class AiController {
 
     private final AiService aiService;
-    private final String aiServiceApiUrl = "http://localhost:8081/api/ai/analyze";
+    private final String aiServiceApiUrl = "http://localhost:5000/api/ai/analyze";
 
 
     @PostMapping(value = "/api/ai/scan", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void scanImageToFindOutDisease(@RequestPart("file")MultipartFile file, HttpServletRequest request) throws IOException {
         var response = aiService.sendImageToAiModelApi(file, aiServiceApiUrl);
+
+
 
     }
 }
