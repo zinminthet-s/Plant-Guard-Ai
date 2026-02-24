@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cures")
 @Getter @Setter
@@ -17,18 +20,23 @@ public class Cure {
     @Column(name = "cure_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "disease_id")
     private Disease disease;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "virus_id")
     private Virus virus;
 
 
-    @ManyToOne
-    @JoinColumn(name = "pesticide_id")
-    private Pesticide pesticide;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "pesticide_cure",
+            joinColumns = @JoinColumn(name = "cure_id"),
+            inverseJoinColumns = @JoinColumn(name = "pesticide_id")
+    )
+    private List<Pesticide> pesticides = new ArrayList<>();
+
 
     private String prevention;
 

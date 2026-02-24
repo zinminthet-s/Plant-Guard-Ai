@@ -1,11 +1,9 @@
 package com.zinminthet.plantguardai.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +21,6 @@ public class Disease {
     private String name;
 
     @OneToMany(mappedBy = "disease")
-    private List<Cure> cures;
+    private List<Cure> cures = new ArrayList<>();
 
 }

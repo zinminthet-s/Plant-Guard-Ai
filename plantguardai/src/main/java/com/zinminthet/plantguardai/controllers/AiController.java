@@ -22,6 +22,9 @@ public class AiController {
     @PostMapping(value = "/api/ai/scan", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void scanImageToFindOutDisease(@RequestPart("file")MultipartFile file, HttpServletRequest request) throws IOException {
         var response = aiService.sendImageToAiModelApi(file, aiServiceApiUrl);
+        var diseaseName = response.getDiseaseName();
+        var diseaseProbability = response.getProbability();
+
 
 
 

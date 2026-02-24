@@ -2,6 +2,7 @@ package com.zinminthet.plantguardai.services;
 
 
 import com.zinminthet.plantguardai.dtos.responses.AiResponseDto;
+import com.zinminthet.plantguardai.repositories.DiseaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AiService {
     private final RestTemplate restTemplate;
+    private final DiseaseRepository diseaseRepository;
 
     public AiResponseDto sendImageToAiModelApi(MultipartFile file, String apiLink) throws IOException {
 
@@ -44,5 +46,13 @@ public class AiService {
 
 
     }
+
+
+    public void searchCureAccordingToDisease(){
+        
+    }
+
+
+
 
 }
