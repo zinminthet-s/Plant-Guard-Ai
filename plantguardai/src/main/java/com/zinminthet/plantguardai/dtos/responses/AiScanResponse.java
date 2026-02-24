@@ -27,6 +27,7 @@ public class AiScanResponse {
     public static class Pesticide {
         private Long pesticideId;
         private String pesticideName;
+        private String imagePath;
     }
 
     @Data
