@@ -21,8 +21,6 @@ public class PesticideController {
 
     private final PesticideService pesticideService;
 
-
-
     private String name;
 
     private String info;

@@ -74,9 +74,6 @@ public class DataInitialization implements CommandLineRunner {
         populateDisease("Healthy","ဘတ်တီးရီးယား","","",0.00,"","","","");
         populateDisease("Healthy","ဘတ်တီးရီးယား","","",0.00,"","","","");
 
-
-
-
     }
 
     @Transactional

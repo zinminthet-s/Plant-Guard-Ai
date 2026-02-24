@@ -20,6 +20,10 @@ public class Cure {
     @Column(name = "cure_id")
     private Long id;
 
+
+    @Column(columnDefinition = "text")
+    private String prevention;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "disease_id")
     private Disease disease;
@@ -38,6 +42,5 @@ public class Cure {
     private List<Pesticide> pesticides = new ArrayList<>();
 
 
-    private String prevention;
 
 }

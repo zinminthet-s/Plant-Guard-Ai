@@ -2,6 +2,9 @@ package com.zinminthet.plantguardai.services;
 
 
 import com.zinminthet.plantguardai.dtos.responses.AiResponseDto;
+import com.zinminthet.plantguardai.dtos.responses.AiScanResponse;
+import com.zinminthet.plantguardai.entities.Disease;
+import com.zinminthet.plantguardai.repositories.CureRepository;
 import com.zinminthet.plantguardai.repositories.DiseaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
@@ -20,7 +23,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AiService {
     private final RestTemplate restTemplate;
-    private final DiseaseRepository diseaseRepository;
+    private final CureRepository cureRepository;
 
     public AiResponseDto sendImageToAiModelApi(MultipartFile file, String apiLink) throws IOException {
 
@@ -43,16 +46,37 @@ public class AiService {
 
          var response = restTemplate.postForObject(apiLink, httpEntity, AiResponseDto.class);
          return response;
-
-
     }
 
 
-    public void searchCureAccordingToDisease(){
-        
+    public AiScanResponse searchCureAccordingToDisease(String diseaseName, AiResponseDto aiResponseDto){
+        var cureEntity = cureRepository.findCureByDiseaseName(diseaseName);
+        var responseDto = new AiScanResponse();
+        var scanResponse = new AiScanResponse.ScanResponse();
+
+        scanResponse.setPrevention(cureEntity.getPrevention());
+
+        var probabilityInString = aiResponseDto.getProbability() * 100.0 + " percent";
+        var diseaseAndProbability = new AiScanResponse.DiseaseAndProbability(aiResponseDto.getDiseaseName(), probabilityInString);
+        scanResponse.setAiResult(diseaseAndProbability);
+
+        var pesticides = cureEntity.getPesticides().stream()
+                .map(pesticideEntity -> {
+                    var pesticideDto = new AiScanResponse.Pesticide();
+                    pesticideDto.setPesticideId(pesticideEntity.getId());
+                    pesticideDto.setPesticideName(pesticideEntity.getName());
+                    pesticideDto.setImagePath(pesticideEntity.getImagePath());
+
+
+                    return pesticideDto;
+                })
+                .toList();
+        scanResponse.setPesticides(pesticides);
+
+        responseDto.setResult(scanResponse);
+
+        return responseDto;
     }
-
-
 
 
 }
