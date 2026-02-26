@@ -23,9 +23,10 @@ public class Pesticide {
     @Column(name = "pesticide_id")
     private Long id;
 
-    @Column(name = "pesticide_name", columnDefinition = "VARCHAR(2048) NOT NULL, FULLTEXT KEY searchNameQuery (pesticide_name) ")
+    @Column(name = "pesticide_name", columnDefinition = "VARCHAR(2048) DEFAULT NULL, FULLTEXT KEY searchNameQuery (pesticide_name) ")
     private String name;
 
+    @Column(columnDefinition = "text")
     private String info;
 
     private Double price;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -28,17 +29,31 @@ public class DataInitialization implements CommandLineRunner {
     private final PesticideRepository pesticideRepository;
 
 
-
     @Transactional
     @Override
     public void run(String... args) throws Exception {
-//        populateRole(List.of("admin", "farmer", "merchant"));
-//        populateFarmer("Kyaw Thu", "kyawthu022004@gmail.com", "kyawthu", "64th street");
+        populateRole(List.of("admin", "farmer", "merchant"));
+        populateFarmer("Test", "test@gmail.com", "test", "64th street");
 //        populateMerchant("Nara Kyaw Swar", "9/khamasa(N)/123123", "nrks@gmail.com", "nrks", List.of("Nara Limited", "Nara Family"));
 //        populateAdmin("Zin Min Thet", "zinminthet.software.engineer@gmail.com", "admin");
 
 
 
+        populateDiseases(Arrays.asList("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ", "စပါးရွက်ညိုရွက်ပြောက်ရောဂါ", "စပါးရွက်လောင်ရောဂါ", "စပါးခေါက်ရောဂါ", "စပါးရွက်ခြောက်ရောဂါ", "Healthy"));
+
+
+//        populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","လင်းနစ် ၂၀ ဒဗလျူပီ","စပါးနှင့် သီးနှံမျိုးစုံတွင် ကျရောက်သော ဘတ်တီးရီးယားရောဂါ အမျိုးမျိုးကို ကာကွယ်ကုသနိုင်သော ဘတ်တီးရီးယားရောဂါသတ်ဆေးဖြစ်သည်။",4500.00,"Oxolinic Acid 20%", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
+//        populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","လင်းနစ် ၂၀ ဒဗလျူပီ","စပါးနှင့် သီးနှံမျိုးစုံတွင် ကျရောက်သော ဘတ်တီးရီးယားရောဂါ အမျိုးမျိုးကို ကာကွယ်ကုသနိုင်သော ဘတ်တီးရီးယားရောဂါသတ်ဆေးဖြစ်သည်။",4500.00,"Oxolinic Acid 20%", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
+////        populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","ဖာတီဇို ၂၀ ဒဗလ်ဴပီ","စပါးတြင္က်ေရာက္ေသာဘက္တီးရီယား႐ြက္ေျခာက္ေရာဂါ၊ဘက္တီးရီးယား႐ြက္စင္းေရာဂါ၊ဟင္းသီးဟင္း႐ြက္တို႔တြင္က်ေရာက္ေသာ ဘက္တီးရီးယားအေပ်ာ့ပုပ္ေရာဂါ၊ ေရွာက္/သံပရာတို႔တြင္က်ေရာက္ေသာ ကင္ကာေရာဂါ၊ပဲအမ်ိဳးမ်ိဳးတြင္က်ေရာက္ေသာဘက္တီးရီးယား႐ြက္ေျခာက္ေရာဂါ၊ဝါသီးႏွံတြင္က်ေရာက္ေသာေထာင့္ကြက္လက္မဲေရာဂါတို႔ကိုကာကြယ္ႏွိမ္နင္းႏိုင္ေသာေဆးစြမ္းေကာင္းတလက္ျဖစ္ပါသည္။",4500.00,"Ferti-Xo 20% WP", "pesticides/ဖာတီဇို ၂၀ ဒဗလ်ဴပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
+
+
+        scanDataPopulate();
+
+
+    }
+
+
+    public void scanDataPopulate(){
         populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","လင်းနစ် ၂၀ ဒဗလျူပီ","စပါးနှင့် သီးနှံမျိုးစုံတွင် ကျရောက်သော ဘတ်တီးရီးယားရောဂါ အမျိုးမျိုးကို ကာကွယ်ကုသနိုင်သော ဘတ်တီးရီးယားရောဂါသတ်ဆေးဖြစ်သည်။",4500.00,"Oxolinic Acid 20%", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
         populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","ဖာတီဇို ၂၀ ဒဗလ်ဴပီ","စပါးတြင္က်ေရာက္ေသာဘက္တီးရီယား႐ြက္ေျခာက္ေရာဂါ၊ဘက္တီးရီးယား႐ြက္စင္းေရာဂါ၊ဟင္းသီးဟင္း႐ြက္တို႔တြင္က်ေရာက္ေသာ ဘက္တီးရီးယားအေပ်ာ့ပုပ္ေရာဂါ၊ ေရွာက္/သံပရာတို႔တြင္က်ေရာက္ေသာ ကင္ကာေရာဂါ၊ပဲအမ်ိဳးမ်ိဳးတြင္က်ေရာက္ေသာဘက္တီးရီးယား႐ြက္ေျခာက္ေရာဂါ၊ဝါသီးႏွံတြင္က်ေရာက္ေသာေထာင့္ကြက္လက္မဲေရာဂါတို႔ကိုကာကြယ္ႏွိမ္နင္းႏိုင္ေသာေဆးစြမ္းေကာင္းတလက္ျဖစ္ပါသည္။",4500.00,"Ferti-Xo 20% WP", "pesticides/ဖာတီဇို ၂၀ ဒဗလ်ဴပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
         populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","မက်ဂါဖန်ဇို","မှိုရောဂါအများစုအတွက် ထိရောက်သော ကာကွယ်ကုသဆေးဖြစ်သည်။ဆေးသည် ပင်လုံးပြန့်အာနိသင်ရှိပြီး မှိုစပိုးမျိုးညှောင့်ပေါက်မှုကို တားဆီးဟန့်တားပေးနိုင်သည့်အတွက် ရောဂါကျရောက်မှုမှ ကာကွယ်ပေးပါသည်။ထို့အပြင် မှိုမျှင်ကြီးထွားပွားများမှုကိုပါ ရပ်တန့်ပေးသည့်အတွက် ရောဂါပြန့်ပွားမှုကို ကုသနှိမ်နင်းပေးနိုင်ပါသည်။",5000.00,"Azoxystrobin 25% ,Difenoconazole 15% WDG","pesticides/Mega Fenzo.png","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
@@ -79,6 +94,56 @@ public class DataInitialization implements CommandLineRunner {
         populateDisease("Healthy","ဘတ်တီးရီးယား","","",0.00,"","","","");
 
     }
+
+    public void populateDiseases(List<String> diseases){
+
+        for(var disease: diseases){
+            var diseaseEntity  = new Disease();
+            diseaseEntity.setName(disease);
+            diseaseEntity.setVirus("ဘတ်တီးရီးယား");
+            diseaseRepository.save(diseaseEntity);
+        }
+    }
+
+    public void populateDisease(
+            String diseaseName, String virusName, String pesticideName, String pesticideInfo, Double pesticidePrice,
+            String pesticideIngredient, String pesticideImagePath, String prevention, String pesticideWeight
+    ){
+
+
+
+        try {
+            Disease disease = diseaseRepository.findDiseaseByName(diseaseName);
+            Pesticide pesticide = new Pesticide();
+            pesticide.setName(pesticideName);
+            pesticide.setInfo(pesticideInfo);
+            pesticide.setPrice(pesticidePrice);
+            pesticide.setWeight(pesticideWeight);
+            pesticide.setIngredients(pesticideIngredient);
+            pesticide.setImagePath(pesticideImagePath);
+
+            pesticideRepository.save(pesticide);
+
+            if(Objects.isNull(disease.getCure())){
+                Cure cure = new Cure();
+                cure.setDisease(disease);
+                disease.setCure(cure);
+                cure.getPesticides().add(pesticide);
+                cure.setPrevention(prevention);
+                cureRepository.save(cure);
+            }else {
+                var cure = disease.getCure();
+                cure.getPesticides().add(pesticide);
+                var saved = cureRepository.save(cure);
+            }
+        }catch(Exception e){
+            throw new RuntimeException("Disease finding got error." + e.getMessage());
+        }
+
+
+    }
+
+
 
     @Transactional
     public void populateRole(List<String> roles){
@@ -171,44 +236,6 @@ public class DataInitialization implements CommandLineRunner {
 
     }
 
-
-    public void populateDisease(
-            String diseaseName, String virusName, String pesticideName, String pesticideInfo, Double pesticidePrice,
-            String pesticideIngredient, String pesticideImagePath, String prevention, String pesticideWeight
-                                ){
-
-        List<String> pesticideFiles = Arrays.asList( "pesticides/Golden Copper.png", "pesticides/Guang Py.jpg", "pesticides/Maxcin 2 SL.jpg", "pesticides/M CoCide 77%WP.jpg", "pesticides/M-Domail 72%WP.jpg", "pesticides/Mega Bay Shin.png", "pesticides/Mega Bishop.png", "pesticides/Mega Copper.png", "pesticides/Mega Cruiser.png", "pesticides/Mega Fenzo.png", "pesticides/M Hexa 5% EC.jpg", "pesticides/MLM Mancozeb 80% WP.jpg", "pesticides/M-Pro 25% EC.jpg", "pesticides/M-Style 25%SC.jpg", "pesticides/ကျူပရိုမက်စ် ၈၅ ဒဗလျူပီ.jpg", "pesticides/ကျူပရို-မိုင်စင် ၄၇၀ ဒဗလျူပီ.jpg", "pesticides/ကျူပရောက်ဆက်.jpg", "pesticides/ကာစင် ၂ အက်စ်အယ်.jpg", "pesticides/ကာဆူဂါ.jpg", "pesticides/ကာဗာ ၂၅ အက်စ်စီ.jpg", "pesticides/ဆိုင်မို-ဇက် ၇၂ ဒဗလျူပီ.jpg", "pesticides/ဇိုလာ ၂၅ အီးစီ.jpg", "pesticides/ဇီဖလို.jpg", "pesticides/တြိုင်-ဂိုးလ် ဒဗလျူပီ.jpg", "pesticides/ထရိုင်းဒန့်.jpg", "pesticides/နိုက်စ် ၅၂၅ အက်စ်အီး.jpg", "pesticides/ဖာတီဇို ၂၀ ဒဗလ်ဴပီ.jpg", "pesticides/ဘင်ဇိုကာ၅၅၀ အက်စ်စီ.jpg", "pesticides/ဘာလီဆိုဒ် ၅ အက်(စ်)အယ်(လ်).jpg", "pesticides/ဘီလီယံ.jpg", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg", "pesticides/သာလွန် ၇၂ အက်စ်စီ.jpg", "pesticides/ဟေဗင်.jpg", "pesticides/ဩဘာစပါးမှိုဆေး.jpg" );
-        var pesticideNames = Arrays.asList( "လင်းနစ် ၂၀ ဒဗလျူပီ", "ဇိုလာ ၂၅ အီးစီ", "ဘင်ဇိုကာ၅၅၀ အက်စ်စီ", "ကာစင် ၂ အက်စ်အယ်", "နိုက်စ် ၅၂၅ အက်စ်အီး", "ဘာလီဆိုဒ် ၅ အက်(စ်)အယ်(လ်)", "ဆိုင်မို-ဇက် ၇၂ ဒဗလျူပီ", "ကျူပရိုမက်စ် ၈၅ ဒဗလျူပီ", "ကာဗာ ၂၅ အက်စ်စီ", "ကျူပရို-မိုင်စင် ၄၇၀ ဒဗလျူပီ", "သာလွန် ၇၂ အက်စ်စီ", "တြိုင်-ဂိုးလ် ဒဗလျူပီ", "M Hexa 5% EC", "M CoCide 77%WP", "M-Domail 72%WP", "MLM Mancozeb 80% WP", "M-Style 25%SC", "M-Pro 25% EC", "ကာဆူဂါ", "ကျူပရောက်ဆက်", "ဘီလီယံ", "ထရိုင်းဒန့်", "ဩဘာစပါးမှိုဆေး", "ဟေဗင်", "ရီဗိုက်", "ဇီဖလို", "ပရိုဝမ်း", "Golden Copper", "Mega Bay Shin", "Mega Bishop", "Mega Copper", "Mega Cruiser", "Mega Fenzo", "Guang Py", "ဖာတီဇို ၂၀ ဒဗလ်ဴပီ", "Maxcin 2 SL");
-
-
-
-        Disease disease = new Disease();
-        disease.setName(diseaseName);
-
-
-//        "imagePath": "pesticides/79b96221-a387-4378-a676-94cb850400d1_Screenshot from 2026-01-27 22-04-34.png"
-
-        Virus virus = new Virus();
-        virus.setName(virusName);
-
-        Pesticide pesticide = new Pesticide();
-        pesticide.setName(pesticideName);
-        pesticide.setInfo(pesticideInfo);
-        pesticide.setPrice(pesticidePrice);
-        pesticide.setWeight(pesticideWeight);
-        pesticide.setIngredients(pesticideIngredient);
-        pesticide.setImagePath(pesticideImagePath);
-
-        Cure cure = new Cure();
-        cure.setDisease(disease);
-        cure.setVirus(virus);
-        cure.getPesticides().add(pesticide);
-        cure.setPrevention(prevention);
-
-        cureRepository.save(cure);
-
-
-    }
 
 
 }

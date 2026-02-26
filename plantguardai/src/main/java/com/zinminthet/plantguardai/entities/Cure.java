@@ -24,13 +24,9 @@ public class Cure {
     @Column(columnDefinition = "text")
     private String prevention;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "disease_id")
     private Disease disease;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "virus_id")
-    private Virus virus;
 
 
     @ManyToMany(cascade = CascadeType.PERSIST)

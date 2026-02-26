@@ -20,7 +20,10 @@ public class Disease {
     @Column(name = "disease_name")
     private String name;
 
-    @OneToMany(mappedBy = "disease")
-    private List<Cure> cures = new ArrayList<>();
+    @Column(name = "caused_by")
+    private String virus;
+
+    @OneToOne(mappedBy = "disease")
+    private Cure cure;
 
 }
