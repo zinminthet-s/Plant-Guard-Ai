@@ -36,7 +36,6 @@ public class MerchantController {
         return ResponseEntity.badRequest().body(new ErrorMessage(e.getMessage()));
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Object>> handleMethodArgumentNotValidException(  MethodArgumentNotValidException e, HttpServletRequest request){
         var fieldErrors = e.getBindingResult().getFieldErrors();
@@ -55,6 +54,9 @@ public class MerchantController {
 
         return ResponseEntity.of(Optional.of(apiResponse));
     }
+
+
+
 
 
     @GetMapping("/api/merchant/{merchantId}/shops")
@@ -106,6 +108,23 @@ public class MerchantController {
     }
 
 
+    @GetMapping("/api/merchant/{merchantId}/shops/pesticides")
+    public ResponseEntity<ApiResponse<List<PesticideResponseDto>>> getPesticidesByMerchantId(@PathVariable Long merchantId, HttpServletRequest request){
+
+        var response = merchantService.getPesticidesByMerchantId(merchantId);
+        var apiResponse = ResponseBuilder.success(response, "Pesticdes are fetched", request);
+        return ResponseEntity.of(Optional.of(apiResponse));
+
+    }
+
+    @GetMapping("/api/merchant/{merchantId}/shops/{shopId}/pesticides")
+    public ResponseEntity<ApiResponse<ShopWithPesticidesResponseDto>> getPesticidesByShopId(@PathVariable Long merchantId ,@PathVariable Long shopId, HttpServletRequest request){
+            var response = merchantService.getPesticidesByShopId(merchantId, shopId);
+            var apiResponse = ResponseBuilder.success(response, String.format("Shop's id: %d pesticides are fetched", shopId), request);
+            return ResponseEntity.of(Optional.of(apiResponse));
+    }
+
+
 
     @GetMapping("/api/merchant/{merchantId}/system")
     public ResponseEntity<ApiResponse<SystemInfoFromMerchantPovResponseDto>> getSystemInfoFromMerchantPov(@PathVariable(name = "merchantId")Long merchantId, HttpServletRequest request){
@@ -127,6 +146,18 @@ public class MerchantController {
                 response, "Fetched merchant's shops with its pesticides", request
         );
         return ResponseEntity.of(Optional.of(apiResponse));
+    }
+
+
+
+
+//    not tested
+    @GetMapping("/api/merchant/{merchantId}/orders")
+    public ResponseEntity<ApiResponse<List<MerchantOrderResponseDto>>> getMerchantOrder(@PathVariable(name = "merchantId")Long merchantId ,HttpServletRequest request){
+        var response = merchantService.getMerchantOrdersById(merchantId);
+        var apiResponse = ResponseBuilder.success(response, "Fetched merchant's orders", request);
+        return ResponseEntity.of(Optional.of(apiResponse));
+
     }
 
 }

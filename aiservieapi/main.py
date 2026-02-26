@@ -12,13 +12,21 @@ app = Flask(__name__)
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "trained_model1.h5")
 model = load_model(MODEL_PATH)
 
+# model warmup
+dummy = np.zeros((1,150,150,3), dtype=np.float32)
+model.predict(dummy)
+
+print("DONE WARMUP")
+
+
+
 @app.route('/api/ai/analyze', methods=['POST'])
 def upload_file():
 
     sent_from = request.headers.get("Sent-From")
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        return jsonify({"error": "Unauthorized"}), 401
+        return jsonify({"error": "Unauthorized"}), 401  
 
     if 'file' not in request.files:
         return jsonify({"error": "No file provided"}), 400
@@ -36,12 +44,6 @@ def upload_file():
 
 
 
-
-    # model warmup
-    dummy = np.zeros((1,150,150,3), dtype=np.float32)
-    model.predict(dummy)
-
-    print("DONE WARMUP")
 
 
 

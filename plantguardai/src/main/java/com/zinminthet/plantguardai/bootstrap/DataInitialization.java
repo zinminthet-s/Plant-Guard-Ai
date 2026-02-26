@@ -27,6 +27,7 @@ public class DataInitialization implements CommandLineRunner {
     private final DiseaseRepository diseaseRepository;
     private final CureRepository cureRepository;
     private final PesticideRepository pesticideRepository;
+    private final AdvertisementRepository advertisementRepository;
 
 
     @Transactional
@@ -34,12 +35,16 @@ public class DataInitialization implements CommandLineRunner {
     public void run(String... args) throws Exception {
         populateRole(List.of("admin", "farmer", "merchant"));
         populateFarmer("Test", "test@gmail.com", "test", "64th street");
-//        populateMerchant("Nara Kyaw Swar", "9/khamasa(N)/123123", "nrks@gmail.com", "nrks", List.of("Nara Limited", "Nara Family"));
-//        populateAdmin("Zin Min Thet", "zinminthet.software.engineer@gmail.com", "admin");
-
-
-
         populateDiseases(Arrays.asList("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ", "စပါးရွက်ညိုရွက်ပြောက်ရောဂါ", "စပါးရွက်လောင်ရောဂါ", "စပါးခေါက်ရောဂါ", "စပါးရွက်ခြောက်ရောဂါ", "Healthy"));
+        scanDataPopulate();
+
+        populateMerchant("Khant Zayar Soe", "9/khamasa(N)/123123", "mc1@gmail.com", "mc1", List.of("Khant Limited", "Khant Family"));
+        populateMerchant("Aung Thaw", "9/khamasa(N)/113123", "mc2@gmail.com", "mc2", List.of("Aung Limited", "Aung Family"));
+
+        populateAdmin("Zin Min Thet", "zinminthet.software.engineer@gmail.com", "admin");
+        populateAdmin("admin", "admin@gmail.com", "admin");
+
+
 
 
 //        populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","လင်းနစ် ၂၀ ဒဗလျူပီ","စပါးနှင့် သီးနှံမျိုးစုံတွင် ကျရောက်သော ဘတ်တီးရီးယားရောဂါ အမျိုးမျိုးကို ကာကွယ်ကုသနိုင်သော ဘတ်တီးရီးယားရောဂါသတ်ဆေးဖြစ်သည်။",4500.00,"Oxolinic Acid 20%", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
@@ -47,11 +52,16 @@ public class DataInitialization implements CommandLineRunner {
 ////        populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","ဖာတီဇို ၂၀ ဒဗလ်ဴပီ","စပါးတြင္က်ေရာက္ေသာဘက္တီးရီယား႐ြက္ေျခာက္ေရာဂါ၊ဘက္တီးရီးယား႐ြက္စင္းေရာဂါ၊ဟင္းသီးဟင္း႐ြက္တို႔တြင္က်ေရာက္ေသာ ဘက္တီးရီးယားအေပ်ာ့ပုပ္ေရာဂါ၊ ေရွာက္/သံပရာတို႔တြင္က်ေရာက္ေသာ ကင္ကာေရာဂါ၊ပဲအမ်ိဳးမ်ိဳးတြင္က်ေရာက္ေသာဘက္တီးရီးယား႐ြက္ေျခာက္ေရာဂါ၊ဝါသီးႏွံတြင္က်ေရာက္ေသာေထာင့္ကြက္လက္မဲေရာဂါတို႔ကိုကာကြယ္ႏွိမ္နင္းႏိုင္ေသာေဆးစြမ္းေကာင္းတလက္ျဖစ္ပါသည္။",4500.00,"Ferti-Xo 20% WP", "pesticides/ဖာတီဇို ၂၀ ဒဗလ်ဴပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
 
 
-        scanDataPopulate();
 
 
     }
 
+
+    public void populateAds(List<String> adsImagePath){
+
+
+//        advertisementRepository.saveAll();
+    }
 
     public void scanDataPopulate(){
         populateDisease("စပါးဘတ်တီးရီးယားရွက်ခြောက်ရောဂါ","ဘတ်တီးရီးယား","လင်းနစ် ၂၀ ဒဗလျူပီ","စပါးနှင့် သီးနှံမျိုးစုံတွင် ကျရောက်သော ဘတ်တီးရီးယားရောဂါ အမျိုးမျိုးကို ကာကွယ်ကုသနိုင်သော ဘတ်တီးရီးယားရောဂါသတ်ဆေးဖြစ်သည်။",4500.00,"Oxolinic Acid 20%", "pesticides/လင်းနစ် ၂၀ ဒဗလျူပီ.jpg","မျိုးစေ့ဆောင်ရောဂါဖြစ်သည့်အတွက် ရောဂါကင်းသော ခံနိုင်ရည်ရှိသော မျိုးကောင်းမျိုးသန့်များကို စိုက်ပျိုးပါ။,ရောဂါဖြစ်စေသော သက်ရှိ ခိုအောင်းနိုင်သော လက်ခံပင်များကို ရှင်းလင်းပစ်ပါ။,စိုက်ပျိုးကတည်းက မြေပြင်ကို မြေဆီလုံလောက်စွာ ပြုပြင်၍ စိုက်ပျိုးပါ။","250g");
@@ -212,12 +222,13 @@ public class DataInitialization implements CommandLineRunner {
         auth.setEmailVerified(true);
         auth.setRole(farmerRole);
 
-        authRepository.save(auth);
+        var savedAuth = authRepository.save(auth);
 
         var merchant = new Merchant();
+        merchant.setAuth(auth);
         merchant.setId(auth.getId());
         merchant.setName(name);
-        merchant.setName(nrc);
+        merchant.setNrc(nrc);
 
         merchantRepository.save(merchant);
 
@@ -227,7 +238,10 @@ public class DataInitialization implements CommandLineRunner {
                 shop.setMerchant(merchant);
                 shop.setName(shopName);
                 shop.setDescription("Owned by" + merchant.getName());
-                shop.setAddress("default street");
+                shop.setAddress("UCS-Mdy");
+
+                var pesticides = pesticideRepository.findAll();
+                shop.addPesticides(pesticides);
 
                 shopRepository.save(shop);
             }

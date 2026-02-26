@@ -9,6 +9,7 @@ import com.zinminthet.plantguardai.entities.*;
 import com.zinminthet.plantguardai.exceptions.MerchantNotFound;
 import com.zinminthet.plantguardai.exceptions.PesticideNotFound;
 import com.zinminthet.plantguardai.exceptions.RoleNotExists;
+import com.zinminthet.plantguardai.exceptions.ShopNotFound;
 import com.zinminthet.plantguardai.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -317,5 +318,66 @@ public class MerchantService {
 
         return response;
 
+    }
+
+
+
+    public ShopWithPesticidesResponseDto getPesticidesByShopId(Long merchantId, Long shopId) throws MerchantNotFound {
+        var merchantEntity = merchantRepository.findById(merchantId).orElseThrow(()->{
+            throw new MerchantNotFound(String.format("Merchant with %d does not exists", merchantId));
+        });
+
+        var shop = merchantEntity.getShops().stream().filter(shopEntity -> shopEntity.getId().equals(shopId)).findFirst().orElseThrow(() -> new ShopNotFound(String.format("Shop with %d does not exists", shopId)));
+        var pesticides = shop.getPesticides();
+        var pesticidesDto = pesticides.stream()
+                .map((pesticideEntity)->{
+                    var pesticideDto = new ShopWithPesticidesResponseDto.Pesticide();
+                    pesticideDto.setPesticideId(pesticideEntity.getId());
+                    var photo = new ShopWithPesticidesResponseDto.Photo();
+                    photo.setUrl(pesticideEntity.getImagePath());
+                    pesticideDto.setPhoto(photo);
+                    pesticideDto.setPrice(pesticideEntity.getPrice());
+                    pesticideDto.setName(pesticideEntity.getName());
+                    return pesticideDto;
+                })
+                .toList();
+
+
+        var response = new ShopWithPesticidesResponseDto();
+        response.setShopId(shop.getId());
+        response.setName(shop.getName());
+        response.setItems(pesticidesDto);
+
+        return response;
+
+    }
+
+    public List<PesticideResponseDto> getPesticidesByMerchantId(Long merchantId) {
+        var merchantEntity = merchantRepository.findById(merchantId).orElseThrow(()->{
+            throw new MerchantNotFound("Merchant is not found");
+        });
+
+        List<PesticideResponseDto> pesticideDtos = new ArrayList<>();
+
+
+        var shopEntities = merchantEntity.getShops();
+        for(var shopEntity: shopEntities){
+            var pesticideEntities = shopEntity.getPesticides();
+            for(var pesticideEntity: pesticideEntities){
+                var pesticideDto = new PesticideResponseDto();
+                pesticideDto.setName(pesticideEntity.getName());
+                pesticideDto.setPrice(pesticideEntity.getPrice());
+                pesticideDto.setPhoto(new PesticideResponseDto.Photo(pesticideEntity.getImagePath()));
+                pesticideDto.setPesticideId(pesticideEntity.getId());
+                pesticideDtos.add(pesticideDto);
+            }
+        }
+
+        return pesticideDtos;
+
+    }
+
+    public List<MerchantOrderResponseDto> getMerchantOrdersById(Long merchantId) {
+                return null;
     }
 }
