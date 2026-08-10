@@ -8,7 +8,7 @@ Plant Guard AI is a backend service designed to help farmers identify plant dise
 - **University:** University of Computer Studies, Mandalay (Cu-Mdy)
 - **Event:** Project Show 2026–2027
 - **Year:** 4th Year Senior Project
-- **Author (Backend):** [Zin Min Thet](https://github.com/zinminthet-s)
+- **Authors (Backend and AI):** [Zin Min Thet] [Aung Thaw]
 - **Author (Frontend Mobile):** [Khan Zayar Soe](https://github.com/khantzayarsoe)
 - **Purpose:** Academic showcase demonstrating AI + enterprise backend integration for agriculture
 
